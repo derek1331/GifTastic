@@ -21,7 +21,7 @@ function displayMovieInfo() {
 
     // Storing the response data
     var repo = response.data;
-    
+
 
     for (var i = 0; i < repo.length; i++) {
 
@@ -36,13 +36,20 @@ function displayMovieInfo() {
 
       // Retrieving the URL for the still image
       var stillURL = repo[i].images.fixed_height_still.url;
-      
+
       // // Retrieving the URL for the  moving image
-      // var movingURL = repo[i].images.fixed_height.url;
-      
-      
+      var movingURL = repo[i].images.fixed_height.url;
+
+
       // Creating an element to hold the image
       var stillimage = $('<img>').attr("src", stillURL);
+          stillimage.attr("data-gif", movingURL);
+          stillimage.attr("data-index", i);
+          stillimage.attr("data-img", stillURL);
+          stillimage.attr("class", "stillimage");
+          console.log(stillimage);
+
+
 
       // Appending the image
       movieDiv.append(stillimage);
@@ -107,4 +114,20 @@ $(document).on("click", ".hello", displayMovieInfo);
 
 // Calling the renderButtons function to display the intial buttons
 renderButtons();
+
+$(document).on("click", ".stillimage", function(event) {
+  console.log("test");
+  //killersGifs.animateGif();
+  var currentIn = $(this).attr("data-index");
+  var tempUrl = $(this).attr("data-gif");
+  var tempUrl2 = $(this).attr("data-img");
+  console.log(currentIn);
+  console.log(tempUrl);
+  if ($(this).attr("src") == tempUrl2) {
+      $(this).attr("src", tempUrl);
+  }
+  else if ($(this).attr("src") == tempUrl) {
+      $(this).attr("src", tempUrl2);
+  };
+});
 
