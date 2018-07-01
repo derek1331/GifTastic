@@ -1,1 +1,72 @@
+* {
+  box-sizing: border-box;
+}
 
+body {
+  background: rgb(128, 128, 128)
+}
+
+
+#main { 
+  display: flex;
+  height: 121px;
+  width: 100%;
+  margin-top: 1.7rem;
+  justify-content: space-between;
+  
+  
+ }
+
+.subject {
+  height: 100%;
+  width: 672px;
+}
+
+ #form {
+     
+  box-shadow:0 0 20px rgba(17, 17, 17, 0.555);
+  width: 246.39px;
+  height: 100%;
+  text-align: center;
+  background: rgb(11, 234, 61);
+
+}
+
+.label {
+  width: 184.55px;
+  white-space: nowrap;
+  color: white;
+  font-weight: 900;
+  font-size: 2rem;
+  font-variant-caps: all-small-caps;
+  font-feature-settings: "smcp";
+
+
+}
+ 
+.input {
+  width: 184.55px;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  
+}
+
+.clicky {
+  margin-bottom: 1rem;
+}
+
+button { 
+  margin: 10px;
+  padding: 10px;
+}
+
+.hello {
+  margin: 10px;
+}
+
+
+
+/* 
+box-shadow: 
+  5px 5px 10px, 
+ -5px -5px 10px; */
