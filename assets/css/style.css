@@ -13,26 +13,22 @@ body {
   width: 100%;
   margin-top: 1.7rem;
   justify-content: space-between;
-  
-  
- }
+  background-color: silver;
 
-.subject {
-  height: 100%;
-  width: 672px;
 }
 
- #form {
+
+ #searchform {
      
   box-shadow:0 0 20px rgba(17, 17, 17, 0.555);
   width: 246.39px;
   height: 100%;
   text-align: center;
-  background: rgb(11, 234, 61);
-
+  background: rgb(25, 175, 150);
+  margin-right: 1rem;
 }
 
-.label {
+#label {
   width: 184.55px;
   white-space: nowrap;
   color: white;
@@ -40,33 +36,57 @@ body {
   font-size: 2rem;
   font-variant-caps: all-small-caps;
   font-feature-settings: "smcp";
-
-
 }
  
-.input {
+#gifsearch {
   width: 184.55px;
   margin-top: 1rem;
   margin-bottom: 1rem;
   
 }
 
-.clicky {
+#addgif {
   margin-bottom: 1rem;
 }
 
-button { 
-  margin: 10px;
-  padding: 10px;
-}
-
 .hello {
-  margin: 10px;
+  margin: 7px;
+  color: white;
+  background-color:rgb(25, 175, 150);
+  padding: 5px;
+  border: none;
+  box-shadow:0 0 20px rgba(17, 17, 17, 0.555);
+  width: 5rem;
+  font-weight: 600;
+}
+
+.holding {
+  display: flex; 
+  flex-wrap: wrap;
+  
+}
+
+#gifsholder {
+  margin-top: 20px;
+  width: 100%;
+  padding: 10px;
+ 
+}
+
+.stillimage {
+  border: 5px silver solid;
+  margin: 5px;
+} 
+
+.rating {
+  color: white;
+}
+
+#addgif {
+  color: white;
+  background-color: hotpink;
+  border-style: double;
+  
 }
 
 
-
-/* 
-box-shadow: 
-  5px 5px 10px, 
- -5px -5px 10px; */

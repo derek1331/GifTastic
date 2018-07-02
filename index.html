@@ -11,31 +11,27 @@
     <script defer src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
     <script defer src="assets/javascript/app.js"></script>
-    
+
 
 </head>
 
 <body>
 
-    <div class="main">
-        <h1>Gify Search</h1>
+    <div id="main">
 
-        <!-- Movies will Get Dumped Dere -->
-        <div id="movies-view"></div>
+        <div id="buttonsholder"></div>
 
-        <!-- Rendered Buttons will get Dumped Here  -->
-        <div id="buttons-view"></div>
-
-        <form id="movie-form">
-            <label for="movie-input">Add a Subject</label>
-            <input type="text" id="movie-input">
+        <form id="searchform">
+            <label id="label" for="gifsearch">Add a Subject</label>
+            <input type="text" id="gifsearch">
             <br>
 
-            <!-- Button triggers new movie to be added -->
-            <input id="add-movie" type="submit" value="Add a Movie Bro">
+            <input id="addgif" type="submit" value="Search">
         </form>
 
     </div>
+
+    <div id="gifsholder"></div>
 </body>
 
 </html>

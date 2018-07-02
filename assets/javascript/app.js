@@ -1,23 +1,19 @@
-var gifs = ["Children Falling", "Deal With It", "Florida", "The Leftovers", "Tom Brady", "Messi Skills", "Hot Dog Eating", "The Challenge CT", "Hmm"];
+var topics = ["Ouch", "Sorry", "Florida", "Oops", "Great White", "Messi Skills", "Explosion", "Denver", "Hmm","Wink"];
 
-
-// displayMovieInfo function re-renders the HTML to display the appropriate content
-
-function displayMovieInfo() {
+function displayGifs() {
 
   var fify = $(this).attr("data-name");
   console.log(fify);
   var queryURL = "https://api.giphy.com/v1/gifs/search?api_key=EWaEUtoOHx2oq192nJfWzXjbVuiTu3IF&q=" + fify + "&limit=10&offset=0&rating=PG-13&lang=en";
 
-
-  // Creating an AJAX call for the specific movie button being clicked
+  // Creating an AJAX call for the specific gify button being clicked
   $.ajax({
     url: queryURL,
     method: "GET"
   }).then(function (response) {
 
-    // Creating a div to hold the movie
-    var movieDiv = $("<div class='movie'>");
+    // Creating a div to hold the gifs
+    var gifDiv = $("<div class='holding'>");
 
     // Storing the response data
     var repo = response.data;
@@ -29,42 +25,29 @@ function displayMovieInfo() {
       console.log(rating);
 
       // Creating an element to have the rating displayed
-      var pOne = $("<p>").text("Rating: " + rating);
+      var rate = $("<p>").html("Rating: " + rating);
+      rate.attr("class", "rating");
 
-      // Displaying the rating
-      movieDiv.append(pOne);
 
-      // Retrieving the URL for the still image
+      // Retrieving the URL for the still gif
       var stillURL = repo[i].images.fixed_height_still.url;
 
-      // // Retrieving the URL for the  moving image
+      // Retrieving the URL for the  moving gif
       var movingURL = repo[i].images.fixed_height.url;
 
+      // Creating an element to hold the gif
+      var stillimage = $('<img>').attr("src", stillURL)
+      .attr("data-gif", movingURL)
+      .attr("data-index", i)
+      .attr("data-img", stillURL)
+      .attr("class", "stillimage");
+     
 
-      // Creating an element to hold the image
-      var stillimage = $('<img>').attr("src", stillURL);
-          stillimage.attr("data-gif", movingURL);
-          stillimage.attr("data-index", i);
-          stillimage.attr("data-img", stillURL);
-          stillimage.attr("class", "stillimage");
-          console.log(stillimage);
+      // Appending the gifs
+      gifDiv.append(stillimage,rate);
 
-
-
-      // Appending the image
-      movieDiv.append(stillimage);
-
-      // Putting the entire movie above the previous movies
-      $("#movies-view").prepend(movieDiv);
-
-      // $(".temp").on("click", function (event) {
-      //   event.preventDefault();
-      //   movieDiv.append(movingimage);
-      // });
-
-
-
-
+       // Adding them to html
+      $("#gifsholder").html(gifDiv);
 
     }
 
@@ -72,62 +55,57 @@ function displayMovieInfo() {
 
 }
 
-// Function for displaying movie data
+
+// Function for displaying gif data
 function renderButtons() {
 
-  // Deleting the movies prior to adding new movies
-  // (this is necessary otherwise you will have repeat buttons)
-  $("#buttons-view").empty();
+  $("#buttonsholder").empty();
 
-  // Looping through the array of movies
-  for (var i = 0; i < gifs.length; i++) {
+  // Looping through the array of gif topics
+  for (var i = 0; i < topics.length; i++) {
 
-    // Then dynamicaly generating buttons for each movie in the array
-    // This code $("<button>") is all jQuery needs to create the beginning and end tag. (<button></button>)
+  
     var a = $("<button>");
-    // Adding a class of movie-btn to our button
+   
     a.addClass("hello");
-    // Adding a data-attribute
-    a.attr("data-name", gifs[i]);
-    // Providing the initial button text
-    a.text(gifs[i]);
-    // Adding the button to the buttons-view div
-    $("#buttons-view").append(a);
+    a.attr("data-name", topics[i]);
+    a.text(topics[i]);
+    $("#buttonsholder").append(a);
   }
 }
 
-// This function handles events where a movie button is clicked
-$("#add-movie").on("click", function (event) {
+// This function handles the search 
+$("#addgif").on("click", function (event) {
   event.preventDefault();
-  // This line grabs the input from the textbox
-  var movie = $("#movie-input").val().trim();
 
-  // Adding movie from the textbox to our array
-  gifs.push(movie);
+  var peanutbutter = $("#gifsearch").val().trim();
 
-  // Calling renderButtons which handles the processing of our movie array
+  topics.push(peanutbutter);
+
   renderButtons();
 });
 
-// Adding a click event listener to all elements with a class of "movie-btn"
-$(document).on("click", ".hello", displayMovieInfo);
+$(document).on("click", ".hello", displayGifs);
 
-// Calling the renderButtons function to display the intial buttons
+// Calling the renderButtons function to display my topics
 renderButtons();
 
-$(document).on("click", ".stillimage", function(event) {
-  console.log("test");
-  //killersGifs.animateGif();
-  var currentIn = $(this).attr("data-index");
-  var tempUrl = $(this).attr("data-gif");
-  var tempUrl2 = $(this).attr("data-img");
-  console.log(currentIn);
-  console.log(tempUrl);
-  if ($(this).attr("src") == tempUrl2) {
-      $(this).attr("src", tempUrl);
+// Switching between gif-states
+$(document).on("click", ".stillimage", function (event) {
+  var index = $(this).attr("data-index");
+  var state = $(this).attr("data-gif");
+  var state2 = $(this).attr("data-img");
+  console.log(index);
+  console.log(state);
+  if ($(this).attr("src") == state2) {
+    $(this).attr("src", state);
   }
-  else if ($(this).attr("src") == tempUrl) {
-      $(this).attr("src", tempUrl2);
+  else if ($(this).attr("src") == state) {
+    $(this).attr("src", state2);
   };
 });
+
+
+
+
 
