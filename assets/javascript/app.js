@@ -1,10 +1,12 @@
-var topics = ["Ouch", "Sorry", "Florida", "Oops", "Great White", "Messi Skills", "Explosion", "Denver", "Hmm","Wink"];
+var topics = ["Ouch", "Sorry", "Florida", "Oops", "Great White", "Messi Skills", "Explosion", "Denver", "Hmm", "Wink"];
+
+var buttons = 10;
 
 function displayGifs() {
 
-  var fify = $(this).attr("data-name");
-  console.log(fify);
-  var queryURL = "https://api.giphy.com/v1/gifs/search?api_key=EWaEUtoOHx2oq192nJfWzXjbVuiTu3IF&q=" + fify + "&limit=10&offset=0&rating=PG-13&lang=en";
+  var gifSearch = $(this).attr("data-name");
+  console.log(gifSearch);
+  var queryURL = "https://api.giphy.com/v1/gifs/search?api_key=EWaEUtoOHx2oq192nJfWzXjbVuiTu3IF&q=" + gifSearch + "&limit=10&offset=0&rating=PG-13&lang=en";
 
   // Creating an AJAX call for the specific gify button being clicked
   $.ajax({
@@ -37,16 +39,16 @@ function displayGifs() {
 
       // Creating an element to hold the gif
       var stillimage = $('<img>').attr("src", stillURL)
-      .attr("data-gif", movingURL)
-      .attr("data-index", i)
-      .attr("data-img", stillURL)
-      .attr("class", "stillimage");
-     
+        .attr("data-gif", movingURL)
+        .attr("data-index", i)
+        .attr("data-img", stillURL)
+        .attr("class", "stillimage");
+
 
       // Appending the gifs
-      gifDiv.append(stillimage,rate);
+      gifDiv.append(stillimage);
 
-       // Adding them to html
+      // Adding them to html
       $("#gifsholder").html(gifDiv);
 
     }
@@ -57,20 +59,21 @@ function displayGifs() {
 
 
 // Function for displaying gif data
-function renderButtons() {
+function myButtons() {
 
   $("#buttonsholder").empty();
 
   // Looping through the array of gif topics
   for (var i = 0; i < topics.length; i++) {
 
-  
+
     var a = $("<button>");
-   
-    a.addClass("hello");
+
+    a.addClass("my-button");
     a.attr("data-name", topics[i]);
     a.text(topics[i]);
     $("#buttonsholder").append(a);
+
   }
 }
 
@@ -78,20 +81,35 @@ function renderButtons() {
 $("#addgif").on("click", function (event) {
   event.preventDefault();
 
-  var peanutbutter = $("#gifsearch").val().trim();
 
-  topics.push(peanutbutter);
+  var gifSubmit = $("#gifsearch").val().trim();
 
-  renderButtons();
+  if (gifSubmit == "") {
+    return;
+  } else if (buttons == 10) {
+    topics.shift();
+    $("button:first").remove();
+    topics.push(gifSubmit);
+    myButtons();
+
+
+
+  } else {
+
+    topics.push(gifSubmit);
+    buttons++;
+
+    myButtons();
+  }
 });
 
-$(document).on("click", ".hello", displayGifs);
+$(document).on("click", ".my-button", displayGifs);
 
-// Calling the renderButtons function to display my topics
-renderButtons();
+// Calling the myButtons function to display my topics
+myButtons();
 
 // Switching between gif-states
-$(document).on("click", ".stillimage", function (event) {
+$(document).on("click", ".stillimage", function () {
   var index = $(this).attr("data-index");
   var state = $(this).attr("data-gif");
   var state2 = $(this).attr("data-img");
@@ -100,7 +118,7 @@ $(document).on("click", ".stillimage", function (event) {
   if ($(this).attr("src") == state2) {
     $(this).attr("src", state);
   }
-  else if ($(this).attr("src") == state) {
+  else {
     $(this).attr("src", state2);
   };
 });
