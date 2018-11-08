@@ -2,7 +2,7 @@
 
 [Demo](https://derek1331.github.io/GifTastic)
 
-Giftastic is a simple application making use of the [Giphy API](https://developers.giphy.com/) to display gifs to and alllows users can create their own buttons to search for different gifs.
+Giftastic is a simple application making use of the [Giphy API](https://developers.giphy.com/) to display gifs. It comes with predifined "searches" but also allows users to create their own.
 
 ## Built With
 
